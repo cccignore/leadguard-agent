@@ -40,4 +40,4 @@ uv run ruff check . && uv run mypy src/leadguard && uv run pytest
 RUN_LIVE_LLM=1 uv run pytest tests/test_live_llm.py tests/test_live_acceptance.py -m live -q -s
 ```
 
-默认 61 项测试覆盖并发、状态顺序、隔离、幂等、Provider 协议、失败关闭、操作员令牌边界与中断请求恢复。硬约束未删减；按题意不做真实 IM，follow-up 仅持久化标记，本地控制面未做 RBAC。单人参赛与 AI 协作记录、最终 commit 和人工投入请填写 [`COLLAB.md`](COLLAB.md)。
+默认 61 项测试覆盖并发、状态顺序、隔离、幂等、Provider 协议、失败关闭、操作员令牌边界与中断请求恢复。硬约束未删减；按题意不做真实 IM，follow-up 仅持久化标记，本地控制面未做 RBAC。单人参赛说明、AI 协作记录与实际耗时见 [`COLLAB.md`](COLLAB.md)。
