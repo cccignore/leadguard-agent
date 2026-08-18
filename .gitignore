@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+__pycache__/
+*.py[cod]
+*.db
+*.db-shm
+*.db-wal
+data/
+htmlcov/
+.coverage

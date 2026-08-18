@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f7f8" />
+    <meta
+      name="description"
+      content="LeadGuard 获客初筛 Agent 本地演示控制台"
+    />
+    <title>LeadGuard · 获客初筛 Agent</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conversation-main">跳到对话区</a>
+
+    <div class="app-shell" id="app">
+      <header class="topbar">
+        <div class="brand" aria-label="LeadGuard 获客初筛 Agent">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+          </span>
+          <span class="brand-copy">
+            <strong>LeadGuard</strong>
+            <small>获客初筛 Agent 控制台</small>
+          </span>
+        </div>
+
+        <div class="topbar-actions">
+          <div
+            class="health-status is-pending"
+            id="health-status"
+            role="status"
+            aria-live="polite"
+          >
+            <span class="health-dot" aria-hidden="true"></span>
+            <span id="health-label">正在连接服务</span>
+          </div>
+          <button
+            class="button button-secondary"
+            id="attack-toggle"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="attack-drawer"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M12 3 4.5 6v5.2c0 4.6 3.2 8.9 7.5 10 4.3-1.1 7.5-5.4 7.5-10V6L12 3Z" />
+              <path d="m9.2 12 1.8 1.8 4-4" />
+            </svg>
+            攻击演示
+          </button>
+          <button class="button button-ghost" id="reset-demo" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6" />
+              <path d="M4 4v4.6h4.6" />
+            </svg>
+            重置 Demo
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="panel customer-panel" aria-labelledby="customer-heading">
+          <div class="panel-heading customer-heading-row">
+            <div>
+              <p class="eyebrow">会话队列</p>
+              <h2 id="customer-heading">客户</h2>
+            </div>
+            <button
+              class="icon-button"
+              id="new-conversation"
+              type="button"
+              aria-label="新建客户会话"
+              title="新建客户会话"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+
+          <label class="search-box" for="customer-search">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="m16 16 4 4" />
+            </svg>
+            <span class="sr-only">搜索客户</span>
+            <input
+              id="customer-search"
+              type="search"
+              placeholder="搜索姓名或客户 ID"
+              autocomplete="off"
+            />
+          </label>
+
+          <div
+            class="customer-list"
+            id="customer-list"
+            aria-live="polite"
+            aria-busy="true"
+          >
+            <div class="list-skeleton" aria-label="正在加载客户">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </aside>
+
+        <section
+          class="panel conversation-panel"
+          id="conversation-main"
+          aria-labelledby="conversation-title"
+        >
+          <header class="conversation-header">
+            <div class="conversation-identity">
+              <p class="eyebrow">当前客户</p>
+              <div class="conversation-title-row">
+                <h1 id="conversation-title">请选择客户</h1>
+                <span class="status-badge status-neutral" id="conversation-status">
+                  未选择
+                </span>
+              </div>
+              <p id="conversation-subtitle">从左侧选择一个会话开始演示</p>
+            </div>
+            <button
+              class="icon-button mobile-inspector-button"
+              id="inspector-jump"
+              type="button"
+              aria-label="查看 Agent 状态"
+              title="查看 Agent 状态"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" />
+              </svg>
+            </button>
+          </header>
+
+          <div class="state-banner" id="state-banner" hidden>
+            <span class="state-banner-icon" aria-hidden="true"></span>
+            <div>
+              <strong id="state-banner-title"></strong>
+              <p id="state-banner-copy"></p>
+            </div>
+          </div>
+
+          <div
+            class="message-log"
+            id="message-log"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions text"
+            aria-busy="false"
+          >
+            <div class="empty-state empty-conversation">
+              <span class="empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 5h14v10H9l-4 4V5Z" />
+                  <path d="M8 9h8M8 12h5" />
+                </svg>
+              </span>
+              <h2>选择一个客户会话</h2>
+              <p>消息、意图判断和确定性防线会在这里同步呈现。</p>
+            </div>
+          </div>
+
+          <form class="composer" id="message-form" novalidate>
+            <div class="composer-field">
+              <label class="sr-only" for="message-input">模拟客户消息</label>
+              <textarea
+                id="message-input"
+                rows="2"
+                maxlength="2000"
+                placeholder="模拟客户输入一条消息……"
+                disabled
+              ></textarea>
+              <div class="composer-meta">
+                <span>以客户身份发送 · <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
+                <span id="character-count">0 / 2000</span>
+              </div>
+            </div>
+            <div class="composer-actions">
+              <button
+                class="button button-ghost compact"
+                id="composer-attack"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="attack-drawer"
+              >
+                攻击样例
+              </button>
+              <button class="button button-primary send-button" id="send-message" type="submit" disabled>
+                <span class="send-label">发送</span>
+                <span class="button-spinner" aria-hidden="true"></span>
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="m4 5 16 7-16 7 3-7-3-7Z" />
+                  <path d="M7 12h13" />
+                </svg>
+              </button>
+            </div>
+            <p class="form-error" id="composer-error" role="alert" hidden></p>
+          </form>
+        </section>
+
+        <aside
+          class="panel inspector-panel"
+          id="inspector-panel"
+          aria-labelledby="inspector-heading"
+        >
+          <div class="panel-heading inspector-heading-row">
+            <div>
+              <p class="eyebrow">服务端权威状态</p>
+              <h2 id="inspector-heading">决策与防线</h2>
+            </div>
+            <span class="live-indicator" title="随会话实时更新">
+              <span aria-hidden="true"></span> Live
+            </span>
+          </div>
+
+          <div class="inspector-content" id="inspector-content">
+            <div class="empty-state inspector-empty">
+              <span class="empty-icon small" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" />
+                </svg>
+              </span>
+              <h3>等待选择会话</h3>
+              <p>这里不会在浏览器内推断状态，只展示后端返回的决策结果。</p>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div class="drawer-layer" id="drawer-layer" hidden>
+      <button
+        class="drawer-backdrop"
+        id="drawer-backdrop"
+        type="button"
+        aria-label="关闭攻击演示"
+      ></button>
+      <aside
+        class="attack-drawer"
+        id="attack-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="attack-title"
+        tabindex="-1"
+      >
+        <header class="drawer-header">
+          <div>
+            <p class="eyebrow">真实接口 · 无测试后门</p>
+            <h2 id="attack-title">攻击演示</h2>
+            <p>所有样例都会经过与普通客户消息完全相同的处理链路。</p>
+          </div>
+          <button
+            class="icon-button"
+            id="attack-close"
+            type="button"
+            aria-label="关闭攻击演示"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="drawer-body">
+          <nav class="scenario-nav" id="scenario-nav" aria-label="攻击场景"></nav>
+          <section class="scenario-detail" id="scenario-detail" aria-live="polite"></section>
+        </div>
+      </aside>
+    </div>
+
+    <dialog class="confirm-dialog" id="confirm-dialog" aria-labelledby="confirm-title">
+      <form method="dialog">
+        <span class="dialog-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3 4.5 6v5.2c0 4.6 3.2 8.9 7.5 10 4.3-1.1 7.5-5.4 7.5-10V6L12 3Z" />
+            <path d="M12 8v5M12 16.5v.1" />
+          </svg>
+        </span>
+        <h2 id="confirm-title">确认操作</h2>
+        <p id="confirm-copy"></p>
+        <div class="dialog-actions">
+          <button class="button button-ghost" id="confirm-cancel" value="cancel">取消</button>
+          <button class="button button-danger" id="confirm-accept" value="default" type="button">
+            确认
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <div class="sr-only" id="screen-reader-status" aria-live="assertive"></div>
+  </body>
+</html>

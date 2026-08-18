@@ -1,0 +1,1979 @@
+{
+  "metadata": {
+    "concurrency": 2,
+    "dataset": "evals/model_cases.jsonl",
+    "endpoint_host": "api.openlux.ai",
+    "generated_at": "2026-08-18T02:00:01.441700+00:00",
+    "model": "gpt-5.6-luna",
+    "provider": "openai_compatible",
+    "repeats": 3
+  },
+  "metrics": {
+    "accepted_action_accuracy": 1.0,
+    "accepted_intent_accuracy": 1.0,
+    "action_confusion": {
+      "escalate_to_human": {
+        "ERROR": 0,
+        "escalate_to_human": 12,
+        "mark_not_interested": 0,
+        "reply": 0,
+        "schedule_followup": 0
+      },
+      "mark_not_interested": {
+        "ERROR": 0,
+        "escalate_to_human": 0,
+        "mark_not_interested": 36,
+        "reply": 0,
+        "schedule_followup": 0
+      },
+      "reply": {
+        "ERROR": 0,
+        "escalate_to_human": 0,
+        "mark_not_interested": 0,
+        "reply": 99,
+        "schedule_followup": 0
+      },
+      "schedule_followup": {
+        "ERROR": 0,
+        "escalate_to_human": 0,
+        "mark_not_interested": 0,
+        "reply": 0,
+        "schedule_followup": 33
+      }
+    },
+    "batch_elapsed_seconds": 365.6257433330029,
+    "by_language": {
+      "en": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "es": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "ja": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "zh": {
+        "joint_accuracy": 1.0,
+        "trials": 135
+      }
+    },
+    "by_tag": {
+      "adversarial": {
+        "joint_accuracy": 1.0,
+        "trials": 24
+      },
+      "ambiguous": {
+        "joint_accuracy": 1.0,
+        "trials": 21
+      },
+      "anaphora": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "auto_reply": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "budget": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "busy": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "capability_question": {
+        "joint_accuracy": 1.0,
+        "trials": 9
+      },
+      "competitor_selected": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "compliance": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "conditional_interest": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "context": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "current_turn_overrides_history": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "demo_request": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "deployment": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "do_not_contact": {
+        "joint_accuracy": 1.0,
+        "trials": 9
+      },
+      "ellipsis": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "encoding": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "exfiltration": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "explicit": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "explicit_rejection": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "fit_question": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "human_requested": {
+        "joint_accuracy": 1.0,
+        "trials": 12
+      },
+      "implicit_recovery": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "implicit_rejection": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "integration_question": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "later_contact": {
+        "joint_accuracy": 1.0,
+        "trials": 33
+      },
+      "mixed_legitimate_request": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "multilingual": {
+        "joint_accuracy": 1.0,
+        "trials": 45
+      },
+      "not_rejected": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "orthogonal_dissatisfaction": {
+        "joint_accuracy": 1.0,
+        "trials": 45
+      },
+      "pilot": {
+        "joint_accuracy": 1.0,
+        "trials": 9
+      },
+      "positive_intent": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "pricing": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "procurement": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "project_cancelled": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "prompt_injection": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      },
+      "purchase_intent": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "role_spoofing": {
+        "joint_accuracy": 1.0,
+        "trials": 12
+      },
+      "security_question": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "topic_shift": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "trial_request": {
+        "joint_accuracy": 1.0,
+        "trials": 3
+      },
+      "unknown_action": {
+        "joint_accuracy": 1.0,
+        "trials": 12
+      },
+      "unknown_fact": {
+        "joint_accuracy": 1.0,
+        "trials": 12
+      },
+      "unrelated_question": {
+        "joint_accuracy": 1.0,
+        "trials": 15
+      },
+      "unrelated_request": {
+        "joint_accuracy": 1.0,
+        "trials": 6
+      }
+    },
+    "canonical_intent_accuracy": 0.9944444444444445,
+    "case_count": 60,
+    "consistency": {
+      "disagreement_case_ids": [
+        "T05"
+      ],
+      "mean_majority_share": 0.9944444444444444,
+      "unanimous_cases": 59,
+      "unanimous_rate": 0.9833333333333333
+    },
+    "dissatisfaction": {
+      "accuracy": 1.0,
+      "errors": 0,
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 135,
+      "tp": 45
+    },
+    "error_case_ids": [],
+    "intent_confusion": {
+      "interested": {
+        "ERROR": 0,
+        "interested": 36,
+        "needs_more_info": 0,
+        "off_topic": 0,
+        "other": 0,
+        "rejected": 0
+      },
+      "needs_more_info": {
+        "ERROR": 0,
+        "interested": 0,
+        "needs_more_info": 36,
+        "off_topic": 0,
+        "other": 0,
+        "rejected": 0
+      },
+      "off_topic": {
+        "ERROR": 0,
+        "interested": 0,
+        "needs_more_info": 0,
+        "off_topic": 36,
+        "other": 0,
+        "rejected": 0
+      },
+      "other": {
+        "ERROR": 0,
+        "interested": 0,
+        "needs_more_info": 1,
+        "off_topic": 0,
+        "other": 35,
+        "rejected": 0
+      },
+      "rejected": {
+        "ERROR": 0,
+        "interested": 0,
+        "needs_more_info": 0,
+        "off_topic": 0,
+        "other": 0,
+        "rejected": 36
+      }
+    },
+    "intent_macro_f1": 0.994443372564152,
+    "intent_mismatch_case_ids": [],
+    "joint_accepted_accuracy": 1.0,
+    "joint_mismatch_case_ids": [],
+    "latency_ms": {
+      "all_p50": 3095.8995830005733,
+      "all_p95": 6242.2975419904105,
+      "success_p50": 3095.8995830005733,
+      "success_p95": 6242.2975419904105
+    },
+    "per_intent": {
+      "interested": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 36
+      },
+      "needs_more_info": {
+        "f1": 0.9863013698630138,
+        "precision": 0.972972972972973,
+        "recall": 1.0,
+        "support": 36
+      },
+      "off_topic": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 36
+      },
+      "other": {
+        "f1": 0.9859154929577464,
+        "precision": 1.0,
+        "recall": 0.9722222222222222,
+        "support": 36
+      },
+      "rejected": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 36
+      }
+    },
+    "repeat_count": 3,
+    "strict_contract_success_rate": 1.0,
+    "successful_trials": 180,
+    "throughput_trials_per_second": 0.49230669142478967,
+    "trial_count": 180
+  },
+  "observations": [
+    {
+      "case_id": "I01",
+      "error_kind": null,
+      "latency_ms": 3843.0271669931244,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I01",
+      "error_kind": null,
+      "latency_ms": 4090.3525830071885,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I01",
+      "error_kind": null,
+      "latency_ms": 2827.669833000982,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I02",
+      "error_kind": null,
+      "latency_ms": 2457.0420419913717,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I02",
+      "error_kind": null,
+      "latency_ms": 2423.3614999975543,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I02",
+      "error_kind": null,
+      "latency_ms": 2721.9412499980535,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I03",
+      "error_kind": null,
+      "latency_ms": 3669.796458998462,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I03",
+      "error_kind": null,
+      "latency_ms": 3447.068167006364,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I03",
+      "error_kind": null,
+      "latency_ms": 2734.8362499906216,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I04",
+      "error_kind": null,
+      "latency_ms": 4235.867292009061,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I04",
+      "error_kind": null,
+      "latency_ms": 3708.19649999612,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I04",
+      "error_kind": null,
+      "latency_ms": 3814.4652500050142,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I05",
+      "error_kind": null,
+      "latency_ms": 3626.1518749961397,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I05",
+      "error_kind": null,
+      "latency_ms": 1837.4504579987843,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I05",
+      "error_kind": null,
+      "latency_ms": 2480.5376250005793,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I06",
+      "error_kind": null,
+      "latency_ms": 5001.360915994155,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I06",
+      "error_kind": null,
+      "latency_ms": 3530.7026659866096,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I06",
+      "error_kind": null,
+      "latency_ms": 2926.6421670035925,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I07",
+      "error_kind": null,
+      "latency_ms": 3546.955749989138,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I07",
+      "error_kind": null,
+      "latency_ms": 3780.4959589993814,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I07",
+      "error_kind": null,
+      "latency_ms": 2762.979916005861,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I08",
+      "error_kind": null,
+      "latency_ms": 3803.8795000029495,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I08",
+      "error_kind": null,
+      "latency_ms": 4504.579457992804,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I08",
+      "error_kind": null,
+      "latency_ms": 5072.95004100888,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I09",
+      "error_kind": null,
+      "latency_ms": 3099.3281249975553,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I09",
+      "error_kind": null,
+      "latency_ms": 2763.2982499926584,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I09",
+      "error_kind": null,
+      "latency_ms": 3354.2252920015017,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I10",
+      "error_kind": null,
+      "latency_ms": 5100.0377089949325,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I10",
+      "error_kind": null,
+      "latency_ms": 2843.6816670000553,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I10",
+      "error_kind": null,
+      "latency_ms": 3459.101083004498,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I11",
+      "error_kind": null,
+      "latency_ms": 4308.286416999181,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I11",
+      "error_kind": null,
+      "latency_ms": 28765.91758300492,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I11",
+      "error_kind": null,
+      "latency_ms": 3242.0996250002645,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "I12",
+      "error_kind": null,
+      "latency_ms": 3134.561457991367,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 1
+    },
+    {
+      "case_id": "I12",
+      "error_kind": null,
+      "latency_ms": 2470.0289169995813,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 2
+    },
+    {
+      "case_id": "I12",
+      "error_kind": null,
+      "latency_ms": 6242.2975419904105,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "interested",
+      "repeat": 3
+    },
+    {
+      "case_id": "N01",
+      "error_kind": null,
+      "latency_ms": 3056.80991699046,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N01",
+      "error_kind": null,
+      "latency_ms": 5109.650416998193,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N01",
+      "error_kind": null,
+      "latency_ms": 2671.5501659928123,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N02",
+      "error_kind": null,
+      "latency_ms": 7021.082791994559,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N02",
+      "error_kind": null,
+      "latency_ms": 2847.029084005044,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N02",
+      "error_kind": null,
+      "latency_ms": 2878.5185419983463,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N03",
+      "error_kind": null,
+      "latency_ms": 3048.1425000034506,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N03",
+      "error_kind": null,
+      "latency_ms": 3695.8409999933792,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N03",
+      "error_kind": null,
+      "latency_ms": 3048.9432499889517,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N04",
+      "error_kind": null,
+      "latency_ms": 2988.7747499888064,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N04",
+      "error_kind": null,
+      "latency_ms": 6143.656957996427,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N04",
+      "error_kind": null,
+      "latency_ms": 5520.358334004413,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N05",
+      "error_kind": null,
+      "latency_ms": 2179.7812919976423,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N05",
+      "error_kind": null,
+      "latency_ms": 2666.490583011182,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N05",
+      "error_kind": null,
+      "latency_ms": 2280.9189160034293,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N06",
+      "error_kind": null,
+      "latency_ms": 4491.973167008837,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N06",
+      "error_kind": null,
+      "latency_ms": 4013.8209590077167,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N06",
+      "error_kind": null,
+      "latency_ms": 4776.5135830122745,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N07",
+      "error_kind": null,
+      "latency_ms": 2878.3553749963176,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N07",
+      "error_kind": null,
+      "latency_ms": 2888.911290996475,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N07",
+      "error_kind": null,
+      "latency_ms": 4263.472749997163,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N08",
+      "error_kind": null,
+      "latency_ms": 4554.754333003075,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N08",
+      "error_kind": null,
+      "latency_ms": 4955.98854200216,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N08",
+      "error_kind": null,
+      "latency_ms": 5148.192291002488,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N09",
+      "error_kind": null,
+      "latency_ms": 4066.1256249877624,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N09",
+      "error_kind": null,
+      "latency_ms": 3403.5999579937197,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N09",
+      "error_kind": null,
+      "latency_ms": 2910.7130839984166,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N10",
+      "error_kind": null,
+      "latency_ms": 3667.762541997945,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N10",
+      "error_kind": null,
+      "latency_ms": 8242.972792009823,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N10",
+      "error_kind": null,
+      "latency_ms": 3939.347749997978,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N11",
+      "error_kind": null,
+      "latency_ms": 4176.662957994267,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N11",
+      "error_kind": null,
+      "latency_ms": 4699.90512500226,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N11",
+      "error_kind": null,
+      "latency_ms": 3854.4083750020945,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "N12",
+      "error_kind": null,
+      "latency_ms": 3089.736041991273,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 1
+    },
+    {
+      "case_id": "N12",
+      "error_kind": null,
+      "latency_ms": 2841.7250829952536,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "N12",
+      "error_kind": null,
+      "latency_ms": 3631.8161669914844,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 3
+    },
+    {
+      "case_id": "O01",
+      "error_kind": null,
+      "latency_ms": 3517.6409160048934,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O01",
+      "error_kind": null,
+      "latency_ms": 5339.1497080010595,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O01",
+      "error_kind": null,
+      "latency_ms": 3513.4056669921847,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O02",
+      "error_kind": null,
+      "latency_ms": 4271.946541994112,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O02",
+      "error_kind": null,
+      "latency_ms": 3782.2470410028473,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O02",
+      "error_kind": null,
+      "latency_ms": 3063.553292013239,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O03",
+      "error_kind": null,
+      "latency_ms": 2697.456207999494,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O03",
+      "error_kind": null,
+      "latency_ms": 3871.365582992439,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O03",
+      "error_kind": null,
+      "latency_ms": 2571.6887500020675,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O04",
+      "error_kind": null,
+      "latency_ms": 11087.904875006643,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O04",
+      "error_kind": null,
+      "latency_ms": 5229.256125006941,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O04",
+      "error_kind": null,
+      "latency_ms": 3705.060667009093,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O05",
+      "error_kind": null,
+      "latency_ms": 3032.3648750054417,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O05",
+      "error_kind": null,
+      "latency_ms": 2597.5639169919305,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O05",
+      "error_kind": null,
+      "latency_ms": 2780.570750008337,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O06",
+      "error_kind": null,
+      "latency_ms": 6959.91745799256,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O06",
+      "error_kind": null,
+      "latency_ms": 4566.591750000953,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O06",
+      "error_kind": null,
+      "latency_ms": 3599.519583993242,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O07",
+      "error_kind": null,
+      "latency_ms": 3157.3820000048727,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O07",
+      "error_kind": null,
+      "latency_ms": 3095.8995830005733,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O07",
+      "error_kind": null,
+      "latency_ms": 5440.6513330031885,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O08",
+      "error_kind": null,
+      "latency_ms": 3829.1915410081856,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O08",
+      "error_kind": null,
+      "latency_ms": 4110.1969169976655,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O08",
+      "error_kind": null,
+      "latency_ms": 3510.672832999262,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O09",
+      "error_kind": null,
+      "latency_ms": 5243.438166988199,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O09",
+      "error_kind": null,
+      "latency_ms": 3672.332375004771,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O09",
+      "error_kind": null,
+      "latency_ms": 3214.395707997028,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O10",
+      "error_kind": null,
+      "latency_ms": 3039.455291989725,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O10",
+      "error_kind": null,
+      "latency_ms": 2549.699791998137,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O10",
+      "error_kind": null,
+      "latency_ms": 2846.4864589914214,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O11",
+      "error_kind": null,
+      "latency_ms": 3459.653707992402,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O11",
+      "error_kind": null,
+      "latency_ms": 3598.535917000845,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O11",
+      "error_kind": null,
+      "latency_ms": 3420.358458010014,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "O12",
+      "error_kind": null,
+      "latency_ms": 3625.653875002172,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 1
+    },
+    {
+      "case_id": "O12",
+      "error_kind": null,
+      "latency_ms": 4041.8103330011945,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 2
+    },
+    {
+      "case_id": "O12",
+      "error_kind": null,
+      "latency_ms": 4946.896124994964,
+      "predicted_action": "reply",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "off_topic",
+      "repeat": 3
+    },
+    {
+      "case_id": "R01",
+      "error_kind": null,
+      "latency_ms": 1439.9811670009512,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R01",
+      "error_kind": null,
+      "latency_ms": 21861.112999991747,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R01",
+      "error_kind": null,
+      "latency_ms": 2132.516792000388,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R02",
+      "error_kind": null,
+      "latency_ms": 1959.584875003202,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R02",
+      "error_kind": null,
+      "latency_ms": 2537.31416699884,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R02",
+      "error_kind": null,
+      "latency_ms": 2022.2093750053318,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R03",
+      "error_kind": null,
+      "latency_ms": 2334.9645830021473,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R03",
+      "error_kind": null,
+      "latency_ms": 1924.6165000076871,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R03",
+      "error_kind": null,
+      "latency_ms": 2244.423583004391,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R04",
+      "error_kind": null,
+      "latency_ms": 2112.125792002189,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R04",
+      "error_kind": null,
+      "latency_ms": 2348.9768339932198,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R04",
+      "error_kind": null,
+      "latency_ms": 2521.6399999917485,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R05",
+      "error_kind": null,
+      "latency_ms": 55372.96599999536,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R05",
+      "error_kind": null,
+      "latency_ms": 2064.1706659953343,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R05",
+      "error_kind": null,
+      "latency_ms": 2176.160083996365,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R06",
+      "error_kind": null,
+      "latency_ms": 3035.3602080140263,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R06",
+      "error_kind": null,
+      "latency_ms": 2731.907334004063,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R06",
+      "error_kind": null,
+      "latency_ms": 2806.9880420080153,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R07",
+      "error_kind": null,
+      "latency_ms": 2003.8613750075456,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R07",
+      "error_kind": null,
+      "latency_ms": 2093.7135410058545,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R07",
+      "error_kind": null,
+      "latency_ms": 2419.563832998392,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R08",
+      "error_kind": null,
+      "latency_ms": 4664.872749999631,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R08",
+      "error_kind": null,
+      "latency_ms": 2109.577208000701,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R08",
+      "error_kind": null,
+      "latency_ms": 2189.03920899902,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R09",
+      "error_kind": null,
+      "latency_ms": 6118.837999994867,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R09",
+      "error_kind": null,
+      "latency_ms": 2592.098458990222,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R09",
+      "error_kind": null,
+      "latency_ms": 2451.6850840009283,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R10",
+      "error_kind": null,
+      "latency_ms": 2733.681291996618,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R10",
+      "error_kind": null,
+      "latency_ms": 2380.485207992024,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R10",
+      "error_kind": null,
+      "latency_ms": 2472.2427500091726,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R11",
+      "error_kind": null,
+      "latency_ms": 2029.4897089916049,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R11",
+      "error_kind": null,
+      "latency_ms": 2437.4223749910016,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R11",
+      "error_kind": null,
+      "latency_ms": 2452.653750005993,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "R12",
+      "error_kind": null,
+      "latency_ms": 4042.742500008899,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 1
+    },
+    {
+      "case_id": "R12",
+      "error_kind": null,
+      "latency_ms": 4325.4792079969775,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 2
+    },
+    {
+      "case_id": "R12",
+      "error_kind": null,
+      "latency_ms": 3949.6200409921585,
+      "predicted_action": "mark_not_interested",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "rejected",
+      "repeat": 3
+    },
+    {
+      "case_id": "T01",
+      "error_kind": null,
+      "latency_ms": 2725.915666000219,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T01",
+      "error_kind": null,
+      "latency_ms": 2437.652208012878,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T01",
+      "error_kind": null,
+      "latency_ms": 2603.0749159981497,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T02",
+      "error_kind": null,
+      "latency_ms": 2938.731000002008,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T02",
+      "error_kind": null,
+      "latency_ms": 2834.6791669900995,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T02",
+      "error_kind": null,
+      "latency_ms": 2804.9549580027815,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T03",
+      "error_kind": null,
+      "latency_ms": 2408.721458996297,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T03",
+      "error_kind": null,
+      "latency_ms": 2421.76929100242,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T03",
+      "error_kind": null,
+      "latency_ms": 2739.2926659958903,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T04",
+      "error_kind": null,
+      "latency_ms": 2899.815833006869,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T04",
+      "error_kind": null,
+      "latency_ms": 3052.099417007412,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T04",
+      "error_kind": null,
+      "latency_ms": 10404.807667000568,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T05",
+      "error_kind": null,
+      "latency_ms": 3107.0917079923674,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T05",
+      "error_kind": null,
+      "latency_ms": 3659.3927920039278,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "needs_more_info",
+      "repeat": 2
+    },
+    {
+      "case_id": "T05",
+      "error_kind": null,
+      "latency_ms": 2108.3713749976596,
+      "predicted_action": "escalate_to_human",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T06",
+      "error_kind": null,
+      "latency_ms": 2434.592124991468,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T06",
+      "error_kind": null,
+      "latency_ms": 2992.683834003401,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T06",
+      "error_kind": null,
+      "latency_ms": 3086.489541004994,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T07",
+      "error_kind": null,
+      "latency_ms": 3154.513000001316,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T07",
+      "error_kind": null,
+      "latency_ms": 3104.729832994053,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T07",
+      "error_kind": null,
+      "latency_ms": 2973.1326250039274,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T08",
+      "error_kind": null,
+      "latency_ms": 3065.8359590015607,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T08",
+      "error_kind": null,
+      "latency_ms": 3071.2051250011427,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T08",
+      "error_kind": null,
+      "latency_ms": 3236.5767500014044,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T09",
+      "error_kind": null,
+      "latency_ms": 2572.2080830018967,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T09",
+      "error_kind": null,
+      "latency_ms": 2612.345917004859,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T09",
+      "error_kind": null,
+      "latency_ms": 2651.8678340071347,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T10",
+      "error_kind": null,
+      "latency_ms": 2893.5054579924326,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T10",
+      "error_kind": null,
+      "latency_ms": 2957.705041990266,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T10",
+      "error_kind": null,
+      "latency_ms": 2753.0134590051603,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T11",
+      "error_kind": null,
+      "latency_ms": 3340.3568750072736,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T11",
+      "error_kind": null,
+      "latency_ms": 3861.0659999976633,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T11",
+      "error_kind": null,
+      "latency_ms": 3631.914041005075,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": true,
+      "predicted_intent": "other",
+      "repeat": 3
+    },
+    {
+      "case_id": "T12",
+      "error_kind": null,
+      "latency_ms": 3869.9842909991276,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 1
+    },
+    {
+      "case_id": "T12",
+      "error_kind": null,
+      "latency_ms": 3425.1129160111304,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 2
+    },
+    {
+      "case_id": "T12",
+      "error_kind": null,
+      "latency_ms": 8929.602667005383,
+      "predicted_action": "schedule_followup",
+      "predicted_dissatisfied": false,
+      "predicted_intent": "other",
+      "repeat": 3
+    }
+  ]
+}
