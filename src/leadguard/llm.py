@@ -114,6 +114,7 @@ class GeminiGateway:
         self._model = settings.gemini_model
         self._attempts = settings.model_retry_attempts
         self._max_reply_chars = settings.max_reply_chars
+        self._request_timeout_seconds = settings.model_timeout_seconds
         self._credential_status = "not_checked"
         self._client = genai.Client(
             api_key=settings.gemini_api_key.get_secret_value(),
@@ -165,20 +166,24 @@ class GeminiGateway:
         last_error: Exception | None = None
         for attempt in range(self._attempts):
             try:
-                response = await self._client.aio.models.generate_content(
-                    model=self._model,
-                    contents=contents,
-                    config=types.GenerateContentConfig(
-                        system_instruction=system_instruction,
-                        response_mime_type="application/json",
-                        response_schema=schema,
-                        temperature=temperature,
-                        max_output_tokens=700,
-                        automatic_function_calling=types.AutomaticFunctionCallingConfig(
-                            disable=True
+                # The SDK exposes no reliable request deadline; enforce the
+                # configured wall-clock timeout around every attempt so a hung
+                # provider cannot stall the turn (and its conversation lock).
+                async with asyncio.timeout(self._request_timeout_seconds):
+                    response = await self._client.aio.models.generate_content(
+                        model=self._model,
+                        contents=contents,
+                        config=types.GenerateContentConfig(
+                            system_instruction=system_instruction,
+                            response_mime_type="application/json",
+                            response_schema=schema,
+                            temperature=temperature,
+                            max_output_tokens=700,
+                            automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                                disable=True
+                            ),
                         ),
-                    ),
-                )
+                    )
                 parsed = response.parsed
                 if isinstance(parsed, schema):
                     result = parsed

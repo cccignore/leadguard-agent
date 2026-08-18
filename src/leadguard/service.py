@@ -18,7 +18,7 @@ from leadguard.domain import (
 )
 from leadguard.llm import DialogueTurn, LLMGateway
 from leadguard.output_guard import OutputGuard
-from leadguard.storage import DuplicateRequestInProgressError, SQLiteStore
+from leadguard.storage import RequestIdContentMismatchError, SQLiteStore
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,18 +67,18 @@ class AgentService:
     ) -> TurnResult:
         cached = self.store.get_turn_result(conversation_id, request_id)
         if cached is not None:
+            recorded = self.store.get_inbound_content(conversation_id, request_id)
+            if recorded is not None and recorded != content:
+                raise RequestIdContentMismatchError(request_id)
             return cached
 
         started_at = self.clock.now()
-        try:
-            starting_state = self.store.record_inbound(
-                conversation_id, request_id, content, started_at
-            )
-        except DuplicateRequestInProgressError:
-            cached = self.store.get_turn_result(conversation_id, request_id)
-            if cached is not None:
-                return cached
-            raise
+        # An identical-content replay is accepted by record_inbound, so a turn
+        # interrupted between the inbound write and the result write (crash or
+        # cancellation) can be retried to completion with the same request_id.
+        starting_state = self.store.record_inbound(
+            conversation_id, request_id, content, started_at
+        )
 
         if starting_state.lifecycle is not Lifecycle.ACTIVE:
             return self._finish_inactive_turn(starting_state, request_id, now=started_at)

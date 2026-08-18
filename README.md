@@ -14,7 +14,7 @@ uv run uvicorn leadguard.app:app --host 127.0.0.1 --port 8000
 
 题方 Gemini：将 `.env` 改为 `LLM_PROVIDER=gemini` 并填写 `GEMINI_API_KEY` / `GEMINI_MODEL`；默认 OpenLux 路径已完成 live 验收。
 
-打开 <http://127.0.0.1:8000>。可对话、运行 5 组自动隔离的攻击脚本，并查看“模型建议 → 代码覆写 → 最终结果”。人工恢复不清限流历史。当前按单 ASGI 进程运行；勿加 `--workers > 1`。
+打开 <http://127.0.0.1:8000>。可对话、运行 5 组自动隔离的攻击脚本，并查看“模型建议 → 代码覆写 → 最终结果”。人工恢复不清限流历史。当前按单 ASGI 进程运行；勿加 `--workers > 1`。设置 `OPERATOR_TOKEN` 后进入 enforced 模式：恢复/重置/诊断接口要求 `X-Operator-Token`，客户消息只返回公开结果；UI 收到 401 时会提示输入令牌。
 
 ## 方案与硬约束
 
@@ -25,6 +25,7 @@ uv run uvicorn leadguard.app:app --host 127.0.0.1 --port 8000
 | 任意 60 秒最多 1 条 | `send_reply` 原子滑窗；59.999s 阻断、60.000s 允许，并发仅一条落库 |
 | 两次连续异常必转人工 | `enforce_state_machine` 用 `off_topic OR dissatisfied` 共享计数，正常轮清零，第二次覆盖模型动作 |
 | 转人工后严格静默 | LLM 前早退，提交/发送复检 `lifecycle + activation_epoch` |
+| 人工身份可信边界 | `OPERATOR_TOKEN` 令牌保护恢复/重置/诊断面；客户面只见公开结果 |
 | 客户不能越权 | 4 动作 enum；拒绝 tool/function call；无 shell、文件或任意 HTTP 工具 |
 | 防内部泄漏 | 秘密不进上下文；本地检查 + 语义审查；失败即转人工且危险草稿不出站 |
 
@@ -39,4 +40,4 @@ uv run ruff check . && uv run mypy src/leadguard && uv run pytest
 RUN_LIVE_LLM=1 uv run pytest tests/test_live_llm.py tests/test_live_acceptance.py -m live -q -s
 ```
 
-默认测试覆盖并发、状态顺序、隔离、幂等、Provider 协议与失败关闭。硬约束未删减；按题意不做真实 IM，follow-up 仅持久化标记，本地控制面未做 RBAC。单人参赛与 AI 协作记录、最终 commit 和人工投入请填写 [`COLLAB.md`](COLLAB.md)。
+默认 61 项测试覆盖并发、状态顺序、隔离、幂等、Provider 协议、失败关闭、操作员令牌边界与中断请求恢复。硬约束未删减；按题意不做真实 IM，follow-up 仅持久化标记，本地控制面未做 RBAC。单人参赛与 AI 协作记录、最终 commit 和人工投入请填写 [`COLLAB.md`](COLLAB.md)。

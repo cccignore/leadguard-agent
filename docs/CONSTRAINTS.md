@@ -56,7 +56,7 @@
 - `SQLiteStore.apply_decision` 在 `BEGIN IMMEDIATE` 中重读最新 conversation、核对 `ACTIVE` 和请求开始时捕获的 `activation_epoch`，再调用 `enforce_state_machine` 并持久化结果。共享计数器的读改写是原子的，不会因并发产生丢失更新。
 - `AgentService.process_message` 从 inbound 写入之前就持有每 customer 独立的 `asyncio.Lock`，并一直持有到该 turn 完成。默认单 ASGI 进程中，同一客户的数据库入站顺序与状态机消费顺序因此一致，不会因某次 LLM 响应更慢而发生后到消息先更新共享计数；不同客户仍可并行处理。
 - `AgentService.process_message` 在调用 LLM 前检查生命周期。`HUMAN_CONTROLLED` 或 `NOT_INTERESTED` 会话只记录客户输入和操作台审计，不调用 LLM，也不执行四种动作。即使状态在 LLM 在途期间变化，`apply_decision` 和 `send_reply` 的二次状态/epoch 检查也会丢弃迟到结果。
-- `SQLiteStore.reactivate` 是唯一恢复路径：只允许人工控制态回到 active，清零共享计数和 follow-up 标记、递增 `activation_epoch`，但保留 `last_outbound_at`。代次递增可以阻止升级前启动、在“升级后又重新激活”之后才返回的旧 LLM 请求执行。
+- `SQLiteStore.reactivate` 是唯一恢复路径：只允许人工控制态回到 active，清零共享计数和 follow-up 标记、递增 `activation_epoch`，但保留 `last_outbound_at`。代次递增可以阻止升级前启动、在“升级后又重新激活”之后才返回的旧 LLM 请求执行。恢复端点属于**操作员控制面**：配置 `OPERATOR_TOKEN` 后，`/reactivate`、`/api/demo/reset`、会话列表与详情均要求 `X-Operator-Token` 头（常数时间比对），客户消息接口对无令牌调用只返回公开结果（outcome + 回复文本），不含意图、覆写与 guard trace。
 - 模型调用失败或输出协议错误，以及 `OutputGuard` 阻断候选回复时，`AgentService` 通过 `SQLiteStore.force_escalate` 失败关闭；该函数同样校验 active 状态和期望 epoch。
 
 ### 为什么 Prompt 不是防线
@@ -67,7 +67,7 @@ Prompt 只让 LLM 判断 `intent` 与独立的 `dissatisfied` 信号。计数、
 
 - 硬保证的表述是“连续两次**被模型判定为**答非所问或明显不满后升级”。自然语言分类仍可能误判或漏判；状态机能保证消费分类结果的方式，却不能形式化保证任一 LLM 对所有表达都分类正确。
 - 这项顺序保证适用于 README 启动命令所使用的默认单 ASGI 进程；`asyncio.Lock` 是进程内对象。未来若启用多个 worker 或多个服务实例，各进程不能共享这把锁，必须在数据库分配单调入站序号，并用每客户队列按序消费，不能仅依赖当前进程锁或 LLM 完成顺序。
-- 重新激活 API 是与客户消息入口分离的控制面，但当前本地 demo 未实现身份认证。客户消息文本无法调用它；生产部署必须为该端点增加身份认证、RBAC 和审计，不能把“知道 URL”视为人工授权。
+- 重新激活 API 是与客户消息入口分离的控制面，并支持基于 `OPERATOR_TOKEN` 环境变量的令牌鉴权：未配置时按本地演示的 open 模式运行（`/api/health` 会标注 `operator_auth: open`），配置后匿名与错误令牌一律 401。这仍是单令牌方案——生产部署应升级为账号体系 + RBAC + 审计，并轮换令牌。
 - “静默”指不调用 LLM、不执行四种业务动作、不产生 `sender=agent` 出站消息；为了可审计，系统仍记录 inbound 和 `sender=system` 的操作台事件。
 
 ### 验收证据
@@ -96,7 +96,7 @@ Prompt 只让 LLM 判断 `intent` 与独立的 `dissatisfied` 信号。计数、
 ### 已知边界
 
 - “100% 代码强制”的范围是：任意客户消息经当前 customer-message 入口处理时，执行能力不会超出四动作，且不能通过文本恢复终止态。拥有服务进程、数据库写权限或直接调用未鉴权控制面的人不属于“客户对话内容”威胁模型。
-- 当前 `reactivate` demo 路由未鉴权是明确的生产边界；它不构成自然语言 prompt injection，但若把服务公开到不可信网络，攻击者可以绕过 UI 直接调用控制面，因此上线前必须修复。
+- `reactivate` / 重置 / 诊断详情已支持 `OPERATOR_TOKEN` 令牌鉴权（enforced 模式下匿名 401，见 `tests/test_operator_boundary.py`）；默认 open 模式仅用于本机演示。把服务暴露到不可信网络前必须设置令牌，并进一步升级为账号体系。
 - 允许列表只约束能力，不保证 LLM 总能挑选业务上最合适的允许动作。提示词注入仍可能在四动作内部影响分类或建议；意图—动作一致性校验、共享状态机和失败关闭降低影响，但无法完全消除语义误判。
 
 ### 验收证据
@@ -125,7 +125,7 @@ Prompt 只让 LLM 判断 `intent` 与独立的 `dissatisfied` 信号。计数、
 - 此约束不能承诺 100%。标记规则可能被同义改写、短编码、隐写或拆分表达绕过；受保护值检查能拦截归一化后的原值回显，但不保证识别加密、摘要或任意变换后的值。语义审查仍由同一模型提供方完成，可能与生成调用出现相关性漏判，也可能误伤正常回复。
 - 最近对话同样被明确标记为不可信数据；历史中的提示注入可能影响后续语义判断，但无法扩张 Action enum、调用工具或绕过服务端状态。长度/条数上限限制持久注入面，跨客户隔离测试证明不会混入其它客户上下文。
 - 数据最小化能阻止模型原样披露它从未获得的底价或凭证，但模型仍可能捏造“内部规则/价格”或概括自己的 system instruction。输出审查降低风险，不能构成形式化信息流证明。
-- 当前 demo 没有独立的客户公开 API：conversation detail 与 `TurnResult.guard_events` 是操作员诊断面，其中有状态机和限流说明。生产系统必须把客户消息通道与操作员审计接口做鉴权和响应字段隔离。
+- 客户面与操作员面已按令牌分离：enforced 模式下，客户消息接口只返回 `{request_id, outcome, reply}` 公开视图，conversation detail、`TurnResult.guard_events` 等诊断数据仅对持令牌调用可见；open 模式（本地实验室默认）不做区分。生产系统应在此基础上继续细化为账号级授权与字段级脱敏。
 - 模型提供方的服务端数据保留、账户侧日志和基础设施权限不由本仓库控制；生产使用前需按供应商政策配置数据治理。源码或主机读取权限也超出“通过客户对话套话”的威胁模型。
 
 ### 验收证据

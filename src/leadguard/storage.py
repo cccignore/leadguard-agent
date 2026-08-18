@@ -23,8 +23,8 @@ class ConversationNotFoundError(LookupError):
     pass
 
 
-class DuplicateRequestInProgressError(RuntimeError):
-    pass
+class RequestIdContentMismatchError(RuntimeError):
+    """The same request_id was replayed with different message content."""
 
 
 class InvalidTransitionError(RuntimeError):
@@ -150,6 +150,17 @@ class SQLiteStore:
             raise ConversationNotFoundError(conversation_id)
         return _conversation_from_row(row)
 
+    def get_inbound_content(self, conversation_id: str, request_id: str) -> str | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT content FROM messages
+                WHERE conversation_id = ? AND request_id = ? AND sender = 'customer'
+                """,
+                (conversation_id, request_id),
+            ).fetchone()
+        return None if row is None else str(row["content"])
+
     def get_turn_result(self, conversation_id: str, request_id: str) -> TurnResult | None:
         with self._connect() as connection:
             row = connection.execute(
@@ -170,6 +181,16 @@ class SQLiteStore:
         content: str,
         now: datetime,
     ) -> Conversation:
+        """Persist the customer message exactly once per request_id.
+
+        A replay with identical content is accepted silently so that a client
+        (or this service, after crashing between the inbound write and the
+        turn-result write) can retry the same request_id and have the turn
+        processed to completion instead of being stuck behind a 409 forever.
+        Reusing a request_id with *different* content is a client bug and is
+        rejected.
+        """
+
         with self._transaction(immediate=True) as connection:
             row = self._require_conversation(connection, conversation_id)
             try:
@@ -186,7 +207,15 @@ class SQLiteStore:
                     (_timestamp(now), conversation_id),
                 )
             except sqlite3.IntegrityError as error:
-                raise DuplicateRequestInProgressError(request_id) from error
+                existing = connection.execute(
+                    """
+                    SELECT content FROM messages
+                    WHERE conversation_id = ? AND request_id = ?
+                    """,
+                    (conversation_id, request_id),
+                ).fetchone()
+                if existing is None or existing["content"] != content:
+                    raise RequestIdContentMismatchError(request_id) from error
         return _conversation_from_row(row)
 
     def apply_decision(

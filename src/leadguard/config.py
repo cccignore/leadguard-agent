@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     llm_model: str = Field(default="gpt-5.6-luna", min_length=1, max_length=160)
     gemini_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"
+    operator_token: SecretStr | None = None
     database_path: Path = Path("data/leadguard.db")
     rate_limit_seconds: int = Field(default=60, ge=60, le=3600)
     max_customer_message_chars: int = Field(default=2_000, ge=1, le=20_000)
@@ -49,6 +50,10 @@ class Settings(BaseSettings):
         if parsed.scheme != "https" and parsed.hostname not in local_hosts:
             raise ValueError("LLM_API_BASE must use HTTPS outside localhost")
         return normalized
+
+    @property
+    def operator_auth_enforced(self) -> bool:
+        return bool(self.operator_token and self.operator_token.get_secret_value().strip())
 
     @property
     def llm_configured(self) -> bool:

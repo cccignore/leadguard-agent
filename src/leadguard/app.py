@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import secrets
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
@@ -13,14 +14,14 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from leadguard.clock import Clock, SystemClock
 from leadguard.config import Settings
-from leadguard.domain import Conversation, Lifecycle, TurnResult
+from leadguard.domain import Conversation, Lifecycle, TurnOutcome, TurnResult
 from leadguard.llm import LLMGateway, UnavailableGateway, build_llm_gateway
 from leadguard.output_guard import OutputGuard
 from leadguard.service import AgentService
 from leadguard.storage import (
     ConversationNotFoundError,
-    DuplicateRequestInProgressError,
     InvalidTransitionError,
+    RequestIdContentMismatchError,
     SQLiteStore,
 )
 
@@ -36,6 +37,18 @@ class CustomerMessageRequest(BaseModel):
 
     content: str = Field(min_length=1, max_length=2_000)
     request_id: UUID
+
+
+class PublicTurnView(BaseModel):
+    """What an unauthenticated (customer-plane) caller may see about a turn.
+
+    Deliberately excludes intent, model/enforced actions, strike counts,
+    lifecycle and guard traces -- those are operator diagnostics.
+    """
+
+    request_id: str
+    outcome: TurnOutcome
+    reply: str | None = None
 
 
 class ConversationView(BaseModel):
@@ -113,6 +126,26 @@ def create_app(
         finally:
             await gateway.aclose()
 
+    def _operator_request(request: Request) -> bool:
+        """True when the caller may see the operator plane.
+
+        With no OPERATOR_TOKEN configured the local lab runs open (documented
+        demo mode); once configured, only callers presenting the token pass.
+        """
+
+        token = runtime_settings.operator_token
+        if token is None or not token.get_secret_value().strip():
+            return True
+        provided = request.headers.get("x-operator-token", "")
+        return secrets.compare_digest(provided, token.get_secret_value())
+
+    def _require_operator(request: Request) -> None:
+        if not _operator_request(request):
+            raise HTTPException(
+                status_code=401,
+                detail="operator token required (X-Operator-Token header)",
+            )
+
     app = FastAPI(
         title=runtime_settings.app_name,
         version="1.0.0",
@@ -162,11 +195,15 @@ def create_app(
             ),
             "model": runtime_settings.active_model if configured else None,
             "rate_limit_seconds": runtime_settings.rate_limit_seconds,
+            "operator_auth": (
+                "enforced" if runtime_settings.operator_auth_enforced else "open"
+            ),
             "version": request.app.version,
         }
 
     @app.get("/api/conversations", response_model=list[ConversationView])
     async def list_conversations(request: Request) -> list[ConversationView]:
+        _require_operator(request)
         return [
             _conversation_view(item, runtime_settings.rate_limit_seconds)
             for item in request.app.state.store.list_conversations()
@@ -185,6 +222,7 @@ def create_app(
 
     @app.get("/api/conversations/{conversation_id}", response_model=ConversationDetail)
     async def conversation_detail(conversation_id: str, request: Request) -> ConversationDetail:
+        _require_operator(request)
         current_store: SQLiteStore = request.app.state.store
         conversation = current_store.get_conversation(conversation_id)
         messages = [
@@ -205,13 +243,13 @@ def create_app(
 
     @app.post(
         "/api/conversations/{conversation_id}/messages",
-        response_model=TurnResult,
+        response_model=None,
     )
     async def customer_message(
         conversation_id: str,
         payload: CustomerMessageRequest,
         request: Request,
-    ) -> TurnResult:
+    ) -> TurnResult | PublicTurnView:
         if len(payload.content) > runtime_settings.max_customer_message_chars:
             raise HTTPException(
                 status_code=422,
@@ -227,22 +265,31 @@ def create_app(
                 detail=("the selected LLM provider is not configured; no keyword fallback is used"),
             )
         try:
-            return await service.process_message(
+            result = await service.process_message(
                 conversation_id,
                 str(payload.request_id),
                 payload.content,
             )
-        except DuplicateRequestInProgressError as error:
+        except RequestIdContentMismatchError as error:
             raise HTTPException(
                 status_code=409,
-                detail="the same request_id is already being processed",
+                detail="this request_id was already used with different content",
             ) from error
+        if _operator_request(request):
+            return result
+        # Customer plane: only the outward-visible result, no diagnostics.
+        return PublicTurnView(
+            request_id=result.request_id,
+            outcome=result.outcome,
+            reply=result.final_reply,
+        )
 
     @app.post(
         "/api/conversations/{conversation_id}/reactivate",
         response_model=ConversationView,
     )
     async def reactivate(conversation_id: str, request: Request) -> ConversationView:
+        _require_operator(request)
         try:
             item = request.app.state.store.reactivate(conversation_id, runtime_clock.now())
         except InvalidTransitionError as error:
@@ -251,6 +298,7 @@ def create_app(
 
     @app.post("/api/demo/reset", response_model=list[ConversationView])
     async def reset_demo(request: Request) -> list[ConversationView]:
+        _require_operator(request)
         current_store: SQLiteStore = request.app.state.store
         current_store.clear()
         for name in ("陈先生", "李女士", "Eve · 攻击演示"):

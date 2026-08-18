@@ -558,12 +558,42 @@
     return `req_${Date.now()}_${Math.random().toString(16).slice(2)}`;
   }
 
+  const OPERATOR_TOKEN_KEY = "leadguard-operator-token";
+
+  function storedOperatorToken() {
+    try {
+      return localStorage.getItem(OPERATOR_TOKEN_KEY) || "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function promptOperatorToken() {
+    const token = window.prompt(
+      "此实例已启用操作员令牌（OPERATOR_TOKEN）。\n本控制台属于操作员诊断面，请输入令牌以继续：",
+      "",
+    );
+    if (token && token.trim()) {
+      try {
+        localStorage.setItem(OPERATOR_TOKEN_KEY, token.trim());
+      } catch (error) {
+        /* storage unavailable: token works for this call only */
+      }
+      return token.trim();
+    }
+    return "";
+  }
+
   async function apiFetch(path, options = {}) {
     const request = {
       method: options.method || "GET",
       headers: { Accept: "application/json", ...(options.headers || {}) },
       signal: options.signal,
     };
+    const operatorToken = storedOperatorToken();
+    if (operatorToken) {
+      request.headers["X-Operator-Token"] = operatorToken;
+    }
     if (options.body !== undefined) {
       request.headers["Content-Type"] = "application/json";
       request.body = JSON.stringify(options.body);
@@ -574,6 +604,13 @@
       response = await fetch(path, request);
     } catch (error) {
       throw new ApiError("无法连接本地服务，请确认后端已经启动。", 0, null);
+    }
+
+    if (response.status === 401 && !options.retriedWithToken) {
+      const fresh = promptOperatorToken();
+      if (fresh) {
+        return apiFetch(path, { ...options, retriedWithToken: true });
+      }
     }
 
     const rawText = await response.text();
